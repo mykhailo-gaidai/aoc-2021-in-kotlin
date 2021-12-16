@@ -8,7 +8,7 @@ fun main() {
             var hasReadLast = false
             var string = ""
             var temp = input.drop(6)
-            while(!hasReadLast) {
+            while (!hasReadLast) {
                 val digit = temp.take(5).also { temp = temp.drop(5) }
                 hasReadLast = digit[0] == '0'
                 string += digit.drop(1)
@@ -72,6 +72,27 @@ fun main() {
         return sumVersions(packet)
     }
 
+    fun processPacket(packet: Packet): Long {
+        if (packet is LiteralValue) return packet.value
+
+        val (_, _, _, children) = packet as Operator
+        return when (packet.typeId) {
+            1L -> children.map { processPacket(it) }.reduce { acc, l -> acc * l }
+            2L -> children.minOf { processPacket(it) }
+            3L -> children.maxOf { processPacket(it) }
+            5L -> if (processPacket(children[0]) > processPacket(children[1])) 1 else 0
+            6L -> if (processPacket(children[0]) < processPacket(children[1])) 1 else 0
+            7L -> if (processPacket(children[0]) == processPacket(children[1])) 1 else 0
+            else -> children.sumOf { processPacket(it) }
+        }
+    }
+
+    fun part2(input: String): Long {
+        val binaryString = hexToBinary(input)
+        val (packet, _) = parsePacket(binaryString)
+        return processPacket(packet)
+    }
+
     val test1 = part1("8A004A801A8002F478")
     check(test1 == 16L) { "test1 = $test1" }
     val test2 = part1("620080001611562C8802118E34")
@@ -81,8 +102,18 @@ fun main() {
     val test4 = part1("A0016C880162017C3686B18A3D4780")
     check(test4 == 31L) { "test4 = $test4" }
 
+    check(part2("C200B40A82") == 3L) {"C200B40A82 = ${part2("C200B40A82")}"}
+    check(part2("04005AC33890") == 54L) {"04005AC33890 = ${part2("04005AC33890")}"}
+    check(part2("880086C3E88112") == 7L) {"880086C3E88112 = ${part2("880086C3E88112")}"}
+    check(part2("CE00C43D881120") == 9L) {"CE00C43D881120 = ${part2("CE00C43D881120")}"}
+    check(part2("D8005AC2A8F0") == 1L) {"D8005AC2A8F0 = ${part2("D8005AC2A8F0")}"}
+    check(part2("F600BC2D8F") == 0L) {"F600BC2D8F = ${part2("F600BC2D8F")}"}
+    check(part2("9C005AC2F8F0") == 0L) {"9C005AC2F8F0 = ${part2("9C005AC2F8F0")}"}
+    check(part2("9C0141080250320F1802104A08") == 1L) {"9C0141080250320F1802104A08 = ${part2("9C0141080250320F1802104A08")}"}
+
     val input = readInput("Day16").first()
     println(part1(input))
+    println(part2(input))
 }
 
 open class Packet(
