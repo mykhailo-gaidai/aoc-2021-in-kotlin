@@ -6,6 +6,10 @@ repositories {
     mavenCentral()
 }
 
+dependencies {
+    implementation("org.amshove.kluent:kluent:1.68")
+}
+
 tasks {
     sourceSets {
         main {
