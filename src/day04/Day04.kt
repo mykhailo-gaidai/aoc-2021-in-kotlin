@@ -1,3 +1,7 @@
+package day04
+
+import readInput
+
 fun main() {
 
     class Board(input: List<String>) {

@@ -1,3 +1,7 @@
+package day08
+
+import readInput
+
 fun main() {
     fun part1(input: List<String>): Int {
         return input.map { it.split('|')[1] }

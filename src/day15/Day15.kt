@@ -1,3 +1,6 @@
+package day15
+
+import readInput
 import kotlin.math.min
 
 fun main() {

@@ -1,3 +1,7 @@
+package day16
+
+import readInput
+
 fun main() {
 
     fun parsePacket(input: String): Pair<Packet, String> {

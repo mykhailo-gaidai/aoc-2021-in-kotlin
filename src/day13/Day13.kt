@@ -1,3 +1,7 @@
+package day13
+
+import readInput
+
 fun main() {
 
     fun printDots(dots: List<Pair<Int, Int>>) {

@@ -1,3 +1,7 @@
+package day14
+
+import readInput
+
 fun main() {
     fun part1(input: List<String>): Long {
         val template = input[0].trim()

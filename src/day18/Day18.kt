@@ -1,4 +1,7 @@
+package day18
+
 import org.amshove.kluent.shouldBeEqualTo
+import readInput
 import kotlin.math.ceil
 import kotlin.math.floor
 
@@ -183,11 +186,11 @@ fun main() {
     calculateMagnitude("[[[[8,7],[7,7]],[[8,6],[7,7]]],[[[0,7],[6,6]],[8,7]]]") shouldBeEqualTo 3488
     println("magnitude works")
 
-    val testInput = readInput("Day18_test1")
+    val testInput = readInput("day18/Day18_test1")
     part1(testInput) shouldBeEqualTo 4140
     part2(testInput) shouldBeEqualTo 3993
 
-    val input = readInput("Day18")
+    val input = readInput("day18/Day18")
     println(part1(input))
     println(part2(input))
 }

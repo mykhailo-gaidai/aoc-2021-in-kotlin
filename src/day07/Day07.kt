@@ -1,3 +1,6 @@
+package day07
+
+import readInput
 import kotlin.math.abs
 
 fun main() {

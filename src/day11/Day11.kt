@@ -1,3 +1,7 @@
+package day11
+
+import readInput
+
 fun main() {
     fun part1(input: List<String>): Int {
         val octopuses = input.map { it.trim() }.map { line ->

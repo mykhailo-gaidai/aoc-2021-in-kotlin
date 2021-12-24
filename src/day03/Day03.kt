@@ -1,3 +1,7 @@
+package day03
+
+import readInput
+
 fun main() {
 
     fun getRating(input: List<String>, bitPreference: Char, index: Int = 0): Int {
